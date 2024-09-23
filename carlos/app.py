@@ -129,6 +129,29 @@ def search_route():
 #     return search_data
 
 
+@app.route('/book/<int:tutor_id>')
+def book_tutor(tutor_id):
+    # Get student and tutor information
+    student_id = get_current_student_id()
+    tutor_info = get_tutor_info(tutor_id)
+
+    # Create a booking request
+    create_booking_request(student_id, tutor_id)
+
+    return render_template('booking_success.html')
+
+def create_booking_request(student_id, tutor_id):
+    conn = sqlite3.connect(music_mentor.db)
+    cursor = conn.cursor()
+
+    cursor.execute('''
+        INSERT INTO bookings (student_id, tutor_id)
+        VALUES (?, ?)
+    ''', (student_id, tutor_id))
+
+    conn.commit()
+    conn.close()
+
 
 
 
