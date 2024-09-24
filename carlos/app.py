@@ -97,7 +97,7 @@ def query_tutor_list():
     connie = sqlite3.connect('db')
     cursor = connie.cursor()
     cursor.execute("""
-SELECT * FROM tutor WHERE 
+SELECT * FROM tutor WHERE instrument='piano'
 """)
     tutor_data = cursor.fetchall()
     print(tutor_data[0][3])
