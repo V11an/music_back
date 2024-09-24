@@ -81,7 +81,27 @@ SELECT * FROM student
     print(student_data[0][3])
     return student_data
 
+# instruments page
+@app.route('/instrumentPage')
+def instrument_list():
+    return render_template('instruments.html')
 
+# list of mentors for a specific instrument
+@app.route('tutor_instrument')
+def tutor_instrument():
+    tutor_data = query_tutor_list()
+    return render_template('tutor_list.html', tutor_data = tutor_data)
+
+# Function to connect to DB and fetch the list of tutors for a specific instrument in table (tutor)
+def query_tutor_list():
+    connie = sqlite3.connect('db')
+    cursor = connie.cursor()
+    cursor.execute("""
+SELECT * FROM tutor WHERE 
+""")
+    tutor_data = cursor.fetchall()
+    print(tutor_data[0][3])
+    return tutor_data
 
 
 # search function
